@@ -31,7 +31,7 @@ works under JRE version 7u21 and earlier (see
 https://gist.github.com/frohoff/24af7913611f8406eaf3), however that seems to
 be standard with WebLogic 10.3.6.0.  You might have to use a different
 payload for newer versions of WebLogic. The advantage to Jdk7u21 is the lack
-of any dependancies in the server's classpath.
+of any dependencies in the server's classpath.
 
 ## Transform the payload into SOAP
 
@@ -115,6 +115,6 @@ Next, send the generated request body to the affected service via a POST
 request to POST /wls-wsat/CoordinatorPortType. The entire resulting HTTP
 request should look just like the example above but much longer.
 
-The server will return a 500 response, however the command should execute
-anyway.
+The server will return a 500 response, however you should see your DNS
+lookup and therefore now have remote command execution.
 

@@ -3,7 +3,18 @@
 
 ## Introduction
 
-Lorem ipsum
+Often when testing Android apps, one wants to gain visibility into HTTP
+requests that the app makes in order to test the back-end services for
+security vulnerabilities.  Naturally these days, this traffic is TLS
+encrypted.  To enable yourself as a man-in-the-middle for your own device,
+you can install custom Certificate Authorities and configure the device to
+use an HTTP proxy just as you would a browser.
+
+However, Android distinguishes between certificates installed by the user
+and certificates that came with the operating system.  Apps can chose to
+trust only the system certificates, and apps that target API level 24 and up
+do this by default.  This article describes how to modify an app to make it
+trust User CA certificates.
 
 This article assumes:
 
@@ -11,13 +22,14 @@ This article assumes:
   running (such as Burp Suite).
 
 * Your Android device has the CA certificate that the proxy is using installed
-  on the device as a User Certificate Authority (search settings for
+  on the device as a User CA (search settings for
   Certificates).
 
 * Your Android device is using the proxy (configured in the advanced
   settings for your WiFi connection) and the proxy can see TLS traffic
   through apps that will trust your CA by default (such as Chrome).
 
+* The app you're working with is not doing certificate pinning in code.
 
 ## Extract the Original App Package
 
