@@ -1,7 +1,7 @@
 
-# Exploiting CVE-2019-2729
+# Exploiting CVE-2019-2729 WebLogic Deserialization Vulnerability
 
-## WebLogic Deserialization Vulnerability
+## Introduction
 
 CVE-2019-2729 is a Java deserialization vulnerability in Oracle WebLogic
 versions 10.3.6.0.0, 12.1.3.0.0, 12.2.1.3.0.  Serialized Java objects are
