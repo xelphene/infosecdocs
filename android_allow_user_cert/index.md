@@ -39,15 +39,15 @@ Extract the original app APK file using [apktool](https://ibotpeaches.github.io/
 apktool d app.apk
 ```
 
-This will unpack the APK file into the `app` subdirectory, where you'll find
-the code and various resources for the app.
+This will unpack the APK file into the `app` subdirectory where you'll find
+decompiled code and various resources for the app.
 
 ## Modify the App
 
 Next, we'll modify AndroidManifest.xml to load a custom XML configuration
-snippet that will enable trust for user CAs in the app.  Add an attribute
-`android:networkSecurityConfig="@xml/network_security_config"` to the
-`<application>` tag. Here's an example abbreviated AndroidManifest.xml:
+snippet that will enable trust for user CAs in the app.  Add a
+`android:networkSecurityConfig="@xml/network_security_config"` attribute to
+the `<application>` tag.  Here's an example abbreviated AndroidManifest.xml:
 
 ```
 <?xml version="1.0" encoding="utf-8" standalone="no"?><manifest ...>
@@ -59,9 +59,9 @@ snippet that will enable trust for user CAs in the app.  Add an attribute
 ```
 
 This will cause Android to include the XML configuration snippet at
-app/res/xml/network_security_config.xml. Next we'll place the relevant configuration
-there. Create the app/res/xml directory if it doesn't exist. Here's the
-entirety of app/res/xml/network_security_config.xml:
+`app/res/xml/network_security_config.xml`. Next we'll place the relevant configuration
+there. Create the `app/res/xml` directory if it doesn't exist. Here's the
+entirety of `app/res/xml/network_security_config.xml`:
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -115,7 +115,7 @@ openssl req -x509 -key key -out cert.pem -days 3650 -nodes -subj '/CN=example.co
 ```
 
 Next, zipalign the APK (`zipalign` is a part of Android Studio and can be found at
-~/Android/Sdk/build-tools/<version> with Android Studio is installed):
+`~/Android/Sdk/build-tools/<version>` with Android Studio is installed):
 
 ```
 zipalign 4 app-modified.apk app-modified-zipaligned.apk

