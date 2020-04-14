@@ -111,6 +111,8 @@ of.write(' <soapenv:Body/>\n')
 of.write('</soapenv:Envelope>\n')
 ```
 
+## Transmit the Payload
+
 Next, send the generated request body to the affected service via a `POST`
 request to `/wls-wsat/CoordinatorPortType`. The entire resulting HTTP
 request should look just like the example above but much longer.

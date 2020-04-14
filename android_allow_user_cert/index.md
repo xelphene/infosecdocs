@@ -44,10 +44,10 @@ decompiled code and various resources for the app.
 
 ## Modify the App
 
-Next, we'll modify AndroidManifest.xml to load a custom XML configuration
+Next, we'll modify `AndroidManifest.xml` to load a custom XML configuration
 snippet that will enable trust for user CAs in the app.  Add a
 `android:networkSecurityConfig="@xml/network_security_config"` attribute to
-the `<application>` tag.  Here's an example abbreviated AndroidManifest.xml:
+the `<application>` tag.  Here's an example abbreviated `AndroidManifest.xml`:
 
 ```
 <?xml version="1.0" encoding="utf-8" standalone="no"?><manifest ...>
@@ -90,7 +90,6 @@ app code modified above is in the `app/` subdirectory:
 ```
 apktool b app -o app-modified.apk
 ```
-
 
 The APK file needs to be signed, but any signature at all will work. This
 guide will generate a new key and certificate for this purpose.
