@@ -1,7 +1,5 @@
 
-# Modifying Android Apps to Allow TLS Intercept with User CAs
-
-## Introduction
+# Introduction
 
 Often when testing Android apps, one wants to gain visibility into HTTP
 requests that the app makes in order to test the back-end services for
@@ -31,7 +29,7 @@ This article assumes:
 
 * The app you're working with is not doing certificate pinning in code.
 
-## Extract the Original App Package
+# Extract the Original App Package
 
 Extract the original app APK file using [apktool](https://ibotpeaches.github.io/Apktool/):
 
@@ -42,7 +40,7 @@ apktool d app.apk
 This will unpack the APK file into the `app` subdirectory where you'll find
 decompiled code and various resources for the app.
 
-## Modify the App
+# Modify the App
 
 Next, we'll modify AndroidManifest.xml to load a custom XML configuration
 snippet that will enable trust for user CAs in the app.  Add a
@@ -82,7 +80,7 @@ connections.
 If you'd like to make any other modifications to the app, now is the perfect
 opportunity. We'll be repackaging the app next.
 
-## Repackaging the APK
+# Repackaging the APK
 
 Build a new APK file incorporating your changes. Again, assuming the
 app code modified above is in the `app/` subdirectory:
@@ -137,7 +135,7 @@ time, you may need to grant app install permissions to your file manager app
 successful, you should now see HTTPS traffic requested by the app in your
 proxy.
 
-## References
+# References
 
 [Android apksigner Reference](https://developer.android.com/studio/command-line/apksigner)
 
