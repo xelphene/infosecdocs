@@ -1,5 +1,31 @@
 
+# Introduction
+
+Network printers and Multifunction Devices (MFDs) are very often a part of a
+corporate network to which little attention is paid.  It is not unusual to
+find such devices on a network during an internal penetration test with
+default administrative credentials set.  Such devices are often configured
+with useful credentials, however, so that they can interact with other
+network infrastructure. For example, a scanner might be configured with
+Active Directory credentials to allow it to upload files or send email.
+
+While these credentials are concealed in the administrative interfaces of
+such devices, these credentials can actually be extracted and subsequently
+used by penetration testers to authenticate to other network services if not
+not properly locked down.
+
+This article will walk the reader through examples of extracting SMTP mail
+service credentials from two different types of MFDs.  It is assumed that
+the reader has already gained access to the administrative interfaces of
+such devices due to misconfiguration.
+
 # Configure Your Mail Server
+
+The first step is to set up a new mail server on the network which is under
+our control.  The vulnerable MFD will be reconfigured to send mail through
+our mail server using the existing (but concealed) credentials.  We will
+monitor the mail transmission and capture the credentials when they are sent to
+our mail server.
 
 Any SMTP server will work. In this article I'll use Exim running on Ubuntu
 18.04. First, install Exim with `apt-get install exim4`. Reconfigure with
@@ -64,7 +90,7 @@ If you see `250-AUTH PLAIN` after the EHLO, you're all set and ready to make
 an MFD try to log in to your mail server.
 
 
-# Configure a Xerox WorkCentre
+# Configuring a Xerox WorkCentre
 
 First, browse to the device with your web browser and log in with the
 default credentials, username "admin", password "1111". Go to the Properties
@@ -183,12 +209,11 @@ In the SMTP section, configure your mail server's hostname/IP address, port
 25, and set SMTP Auth Encryption to Inactive. Be sure to save prior
 settings.
 
-For the life of me, I couldn't figure out how to make these things simply
-send a test message on demand. You can set the device up to send
-various notifications. From the Configuration page, hit Device Settings ->
-Auto Email Notification. Add any email address to a Group in the "Groups to
-Notify" section. In the "Select Groups/Items to Notify" check the box for as
-many notifications as possible.
+These devices apparently do not have a way to send a test message on demand. 
+You can set the device up to send various notifications.  From the
+Configuration page, hit Device Settings -> Auto Email Notification.  Add any
+email address to a Group in the "Groups to Notify" section.  In the "Select
+Groups/Items to Notify" check the box for as many notifications as possible.
 
 There's a notification for "Device Access Violation", but strangely this
 doesn't do anything for failed adminstrative logins. As far as I can tell,
@@ -197,4 +222,10 @@ one must wait for one of these events to occur naturally.
 If the device has any scanned documents available on it, you can ask it to
 send one immediately. From the Home page, go to Print Job/Stored File ->
 Document Server and look around.
+
+# Conclusion
+
+These often underlooked devices frequently contain useful information which
+can lead to further compromise, and it is not difficult to extract them.
+Always have a look for this low hanging fruit on any internal pen test.
 
