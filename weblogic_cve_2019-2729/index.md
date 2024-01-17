@@ -1,5 +1,7 @@
 
-# Introduction
+# Exploiting CVE-2019-2729 WebLogic Deserialization Vulnerability
+
+## Introduction
 
 CVE-2019-2729 is a Java deserialization vulnerability in Oracle WebLogic
 versions 10.3.6.0.0, 12.1.3.0.0, 12.2.1.3.0.  Serialized Java objects are
@@ -11,7 +13,7 @@ This exploit was tested against WebLogic 10.3.6.0.
 A typical vulnerable server will have HTTP services listening on one or more
 TCP ports which have a web application at `/wls-wsat/`.
 
-# Generate a payload with ysoserial
+## Generate a payload with ysoserial
 
 First, get ysoserial (https://github.com/frohoff/ysoserial) and use it to
 generate a simple RCE payload.
@@ -31,7 +33,7 @@ be standard with WebLogic 10.3.6.0.  You might have to use a different
 payload for newer versions of WebLogic. The advantage to Jdk7u21 is the lack
 of any dependencies in the server's classpath.
 
-# Transform the payload into SOAP
+## Transform the payload into SOAP
 
 Next, we need to massage this blob into a SOAP HTTP request body.  The
 affected web services accept SOAP requests containing Java objects encoded

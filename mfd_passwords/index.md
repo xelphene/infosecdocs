@@ -1,5 +1,6 @@
+# Extracting Sensitive Info from Insecure MFDs
 
-# Introduction
+## Introduction
 
 Network printers and Multifunction Devices (MFDs) are very often a part of a
 corporate network to which little attention is paid.  It is not unusual to
@@ -19,7 +20,7 @@ service credentials from two different types of MFDs.  It is assumed that
 the reader has already gained access to the administrative interfaces of
 such devices due to misconfiguration.
 
-# Configure Your Mail Server
+## Configure Your Mail Server
 
 The first step is to set up a new mail server on the network which is under
 our control.  The vulnerable MFD will be reconfigured to send mail through
@@ -36,7 +37,7 @@ Insert the following exim4 configuration snippet to a new file at
 /etc/exim4/conf.d/auth/20_authplain:
 
 ```
-# enable plaintext authentication via AUTH PLAIN
+## enable plaintext authentication via AUTH PLAIN
 plain_server:
   driver = plaintext
   public_name = PLAIN
@@ -49,10 +50,10 @@ Edit /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs. Comment out the
 following:
 
 ```
-# listen on all all interfaces?
-#.ifdef MAIN_LOCAL_INTERFACES
-#local_interfaces = MAIN_LOCAL_INTERFACES
-#.endif
+## listen on all all interfaces?
+##.ifdef MAIN_LOCAL_INTERFACES
+##local_interfaces = MAIN_LOCAL_INTERFACES
+##.endif
 ```
 
 Insert the following exim4 configuration snippet to a new file at
@@ -90,7 +91,7 @@ If you see `250-AUTH PLAIN` after the EHLO, you're all set and ready to make
 an MFD try to log in to your mail server.
 
 
-# Configuring a Xerox WorkCentre
+## Configuring a Xerox WorkCentre
 
 First, browse to the device with your web browser and log in with the
 default credentials, username "admin", password "1111". Go to the Properties
@@ -196,7 +197,7 @@ they have access to more than just an SMTP relay ;).
 [required_info]: required_info.png "Required Information"
 [connection_encryption]: connection_encryption.png "Connection Encryption"
 
-# Configuring a Ricoh MP 306Z
+## Configuring a Ricoh MP 306Z
 
 The default administrator credentials are username "admin" with a blank
 password.
@@ -223,7 +224,7 @@ If the device has any scanned documents available on it, you can ask it to
 send one immediately. From the Home page, go to Print Job/Stored File ->
 Document Server and look around.
 
-# Conclusion
+## Conclusion
 
 These often underlooked devices frequently contain useful information which
 can lead to further compromise, and it is not difficult to extract them.
