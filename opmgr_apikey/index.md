@@ -1,5 +1,5 @@
 
-# Exploiting CVE-2022-36923: ManageEngine OpManager API Auth Bypass
+# Exploiting CVE-2022-36923 ManageEngine OpManager API Auth Bypass
 
 Existing exploit information for CVE-2022-36923, an authentication bypass in
 ManageEngine OpManager, suggests a string of length 48 for the HANDSHAKE_KEY
